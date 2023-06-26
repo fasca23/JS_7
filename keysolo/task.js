@@ -32,21 +32,30 @@ class Game {
     this.set = setInterval(workTimer, 1000);
   }
 // //////////////////////////////
+  // registerEvents() {
+  // // При переключении раскладки как бы подвисает... не выдает не неправильные слова не правильные...
+  // // Но это лечится легко, если нажимать левой клавишей мыши на экран браузера сразу после переключения раскладки shift+alt
+  // // Почему??????
+  //   let currentSymbolType = this.currentSymbol.textContent.toLowerCase().charCodeAt(0);
+  //     let collation = (e) => {
+  //         currentSymbolType = this.currentSymbol.textContent.charCodeAt(0);
+  //         if (currentSymbolType == e.key.toLowerCase().charCodeAt(0)) {
+  //           this.success();
+  //         } else {
+  //           this.fail();
+  //         }
+  //     }
+  //     document.addEventListener(`keypress`, collation);
+  // }
+
   registerEvents() {
-  // При переключении раскладки как бы подвисает... не выдает не неправильные слова не правильные...
-  // Но это лечится легко, если нажимать левой клавишей мыши на экран браузера сразу после переключения раскладки shift+alt
-  // Почему??????
-    let currentSymbolType = this.currentSymbol.textContent.toLowerCase().charCodeAt(0);
-      let collation = (e) => {
-          currentSymbolType = this.currentSymbol.textContent.charCodeAt(0);
-          if (currentSymbolType == e.key.toLowerCase().charCodeAt(0)) {
-            this.success();
-          } else {
-            this.fail();
-          }
-      }
-      document.addEventListener(`keypress`, collation);
+    document.addEventListener('keyup', (e) => {
+      if (e.key === 'Control' || e.key === 'Alt' || e.key === 'Shift') return;
+      e.key === this.currentSymbol.innerHTML ? this.success() : this.fail();
+    });
   }
+
+
 // //////////////////////////////
   success() {
     this.currentSymbol.classList.add("symbol_correct");
