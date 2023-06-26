@@ -48,12 +48,23 @@ class Game {
   //     document.addEventListener(`keypress`, collation);
   // }
 
+  // registerEvents() {
+  //   document.addEventListener('keyup', (e) => {
+  //     if (e.key === 'Control' || e.key === 'Alt' || e.key === 'Shift') return;
+  //     e.key === this.currentSymbol.innerHTML ? this.success() : this.fail();
+  //   });
+  // }
+
   registerEvents() {
     document.addEventListener('keyup', (e) => {
       if (e.key === 'Control' || e.key === 'Alt' || e.key === 'Shift') return;
-      e.key === this.currentSymbol.innerHTML ? this.success() : this.fail();
+
+      if (e.key.toLowerCase() == this.currentSymbol.textContent.toLowerCase()) {
+        this.success();
+     }
     });
   }
+
 
 
 // //////////////////////////////
