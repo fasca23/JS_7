@@ -33,23 +33,19 @@ class Game {
   }
 // //////////////////////////////
   registerEvents() {
-
-    
-    document.addEventListener(`keydown`, button => {
-        const symbol = this.currentSymbol;
-        // исключаем все нажатия кроме букв и цифр
-        if ([32, 65, 67, 69, 83, 84, 91, 92].includes(button.key.charCodeAt())) {
-          return
-        }
-        // ??
-        if (button.repeat) {
-          return
-        }
-        if (button.key.toLowerCase() === symbol.textContent.toLowerCase()) {
-          return this.success();
-        }
-        return this.fail();
-      })
+  // При переключении раскладки как бы подвисает... не выдает не неправильные слова не правильные...
+  // Но это лечится легко, если нажимать левой клавишей мыши на экран браузера сразу после переключения раскладки shift+alt
+  // Почему??????
+    let currentSymbolType = this.currentSymbol.textContent.toLowerCase().charCodeAt(0);
+      let collation = (e) => {
+          currentSymbolType = this.currentSymbol.textContent.charCodeAt(0);
+          if (currentSymbolType == e.key.toLowerCase().charCodeAt(0)) {
+            this.success();
+          } else {
+            this.fail();
+          }
+      }
+      document.addEventListener(`keypress`, collation);
   }
 // //////////////////////////////
   success() {
@@ -86,18 +82,18 @@ class Game {
 
   getWord() {
     const words = [
-        'боб',
-        'супер',
-        'нетология',
-        'привет',
-        'котенок',
-        'рок',
-        'ютуб',
-        'попкорн',
-        'кино',
-        'питон',
-        'джава',
-        'информатика'
+        'боб gg',
+        'супер gg',
+        'нетологи яgg',
+        'привет gg',
+        'котенок gg',
+        'рок gg',
+        'ютуб gg',
+        'попкорн gg',
+        'кино gg',
+        'питон gg',
+        'джава gg',
+        'информатика gg'
       ],
       index = Math.floor(Math.random() * words.length);
 
